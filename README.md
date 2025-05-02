@@ -13,7 +13,13 @@ What does DNSRator do?
 In summary, DNSRator offers a valuable insight into the technical infrastructure of websites. I believe it is a particularly useful tool for web developers, system administrators, and cybersecurity professionals.
 
 -------
+For Video
 
 
 https://github.com/user-attachments/assets/624b661c-8a22-4414-bda3-effffc44c169
 
+
+-----
+
+For GIF
+![IkB6EOLy2x](https://github.com/user-attachments/assets/b95b3309-e937-4943-836c-a465229dd230)
