@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DNS Records</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"></path>
+                        <path d="M12 8v8"></path>
+                        <path d="M8 12h8"></path>
+                    </svg>
+                    DNSRator
+                </h1>
+                <div class="current-site"></div>
+            </div>
+            <button class="theme-toggle" id="theme-toggle" title="Toggle theme">☀️</button>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="a">A Records</div>
+            <div class="tab" data-tab="www">WWW</div>
+            <div class="tab" data-tab="ns">NS</div>
+            <div class="tab" data-tab="mx">MX</div>
+            <div class="tab" data-tab="txt">TXT</div>
+        </div>
+        
+        <div class="records-container">
+            <div class="record-box active" id="a-records">
+                <h2>A Records <span class="count" id="a-count">0</span></h2>
+                <div class="record-content"></div>
+            </div>
+            
+            <div class="record-box" id="www-records">
+                <h2>WWW Record <span class="count" id="www-count">0</span></h2>
+                <div class="record-content"></div>
+            </div>
+            
+            <div class="record-box" id="ns-records">
+                <h2>Nameservers <span class="count" id="ns-count">0</span></h2>
+                <div class="record-content"></div>
+            </div>
+            
+            <div class="record-box" id="mx-records">
+                <h2>Mail Servers <span class="count" id="mx-count">0</span></h2>
+                <div class="record-content"></div>
+            </div>
+            
+            <div class="record-box" id="txt-records">
+                <h2>TXT Records <span class="count" id="txt-count">0</span></h2>
+                <div class="record-content"></div>
+            </div>
+        </div>
+        
+        <div class="loader">Loading DNS records...</div>
+        
+        <div class="footer">
+            <span>DNSRator - All Right Reserved.</span>
+        </div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
