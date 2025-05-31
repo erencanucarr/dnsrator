@@ -1,6 +1,6 @@
 # Privacy Policy for DNSRator
 
-**Effective Date:** [Insert Date]
+**Effective Date:** [01.06.2025]
 
 DNSRator is a browser extension that enables users to quickly and easily view DNS records (such as A, MX, CNAME, TXT, SPF, DKIM, DMARC, and others) of websites directly from their browser. It is designed for web developers, cybersecurity professionals, network administrators, and anyone interested in learning about DNS systems.
 
