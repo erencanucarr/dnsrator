@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ns: document.getElementById("ns-count"),
       mx: document.getElementById("mx-count"),
       txt: document.getElementById("txt-count"),
+      ptr: document.getElementById("ptr-count")
     }
   
     // Theme management
@@ -70,6 +71,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             break
           case "txt":
             recordBox = document.getElementById("txt-records")
+            break
+          case "ptr":
+            recordBox = document.getElementById("ptr-records")
             break
         }
   
@@ -162,6 +166,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       }
   
+      // New function to fetch PTR records
+      async function fetchPTRRecord(ip) {
+        try {
+          const arpa = ip.split('.').reverse().join('.') + '.in-addr.arpa';
+          const response = await fetch(`https://dns.google/resolve?name=${arpa}&type=PTR`)
+          const data = await response.json()
+          return data.Answer || []
+        } catch (error) {
+          console.error("Error fetching PTR record:", error)
+          return []
+        }
+      }
+  
       // Update the displayRecords function to handle TXT records differently
       function displayRecords(records, type, countElement) {
         let contentElement
@@ -185,6 +202,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             break
           case "TXT":
             contentElement = document.querySelector("#txt-records .record-content")
+            if (countElement) countElement.textContent = records.length
+            break
+          case "PTR":
+            contentElement = document.querySelector("#ptr-records .record-content")
             if (countElement) countElement.textContent = records.length
             break
         }
@@ -223,6 +244,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       const aRecords = await fetchDNSRecords("A")
       displayRecords(aRecords, "A", countElements.a)
   
+      // After fetching A records, fetch PTR records for each IP
+      if (aRecords && aRecords.length > 0) {
+        const ptrPromises = aRecords.map(record => fetchPTRRecord(record.data))
+        const ptrResults = await Promise.all(ptrPromises)
+        const ptrRecords = ptrResults.flat()
+        displayRecords(ptrRecords, "PTR", countElements.ptr)
+      }
+  
       const wwwRecords = await fetchWWWRecord()
       displayRecords(wwwRecords, "WWW", countElements.www)
   
@@ -240,4 +269,3 @@ document.addEventListener("DOMContentLoaded", async () => {
       loader.style.display = "none"
     }
   })
-  
