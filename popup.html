@@ -23,11 +23,12 @@
         </header>
         
         <div class="tabs">
-            <div class="tab active" data-tab="a">A Records</div>
+            <div class="tab active" data-tab="a">A</div>
             <div class="tab" data-tab="www">WWW</div>
             <div class="tab" data-tab="ns">NS</div>
             <div class="tab" data-tab="mx">MX</div>
             <div class="tab" data-tab="txt">TXT</div>
+            <div class="tab" data-tab="ptr">PTR</div>
         </div>
         
         <div class="records-container">
@@ -53,6 +54,11 @@
             
             <div class="record-box" id="txt-records">
                 <h2>TXT Records <span class="count" id="txt-count">0</span></h2>
+                <div class="record-content"></div>
+            </div>
+
+            <div class="record-box" id="ptr-records">
+                <h2>PTR Records <span class="count" id="ptr-count">0</span></h2>
                 <div class="record-content"></div>
             </div>
         </div>
