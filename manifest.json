@@ -1,13 +1,22 @@
 {
   "manifest_version": 3,
   "name": "DNSRator",
-  "version": "1.0",
-  "description": "DNS Görüntüleme",
+  "version": "2.0.0",
+  "description": "DNS record viewer and IP geolocation lookup extension.",
   "permissions": [
     "activeTab",
-    "tabs"
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://*/",
+    "https://*/"
   ],
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "settings.html"
 }
