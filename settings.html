@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>DNSRator + IP Scan – Settings</title>
+</head>
+<body class="popup-container">
+  <h2 style="margin-top:0">Settings</h2>
+
+  <!-- Theme toggle -->
+  <div class="settings-section theme-toggle">
+    <label for="theme-select"><strong>Theme:</strong></label>
+    <select id="theme-select">
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+    </select>
+  </div>
+
+  <!-- Endpoints list -->
+  <div class="settings-section">
+    <strong>Endpoints</strong>
+    <small class="muted">(first success stops cascade)</small>
+    <div id="endpoints-container"></div>
+    <button id="add-endpoint">Add Endpoint</button>
+  </div>
+
+  <button id="save-btn">Save</button>
+
+  <script type="module" src="settings.js"></script>
+</body>
+</html>
