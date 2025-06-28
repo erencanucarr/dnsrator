@@ -3,6 +3,11 @@
 <head>
     <title>DNSRator</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_overrides.css">
+    <!-- Inter font for clean, modern typography -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta charset="UTF-8">
 </head>
 <body>
@@ -18,13 +23,16 @@
                     DNSRator
                 </h1>
                 <div class="current-site"></div>
+                <div class="security-indicators">
+                    <span id="blacklist-indicator" class="indicator" data-tip="Spamhaus blacklist status"></span>
+                </div>
             </div>
             <button class="theme-toggle" id="theme-toggle" title="Toggle theme">☀️</button>
         </header>
         
         <div class="tabs main-tabs">
-            <div class="tab active" data-tab="dns">DNS</div>
-            <div class="tab" data-tab="ip">IP Lookup</div>
+            <div class="tab active" data-tab="dns"><i class="fa fa-globe"></i> DNS</div>
+            <div class="tab" data-tab="ip"><i class="fa fa-search"></i> IP Lookup</div>
         </div>
         
         <div class="records-container">
@@ -39,28 +47,28 @@
                     <div class="tab" data-tab="ptr">PTR</div>
                 </div>
                 <div class="dns-records">
-                    <div class="record-box active" id="a-records">
-                        <h2>A Records <span class="count" id="a-count">0</span></h2>
+                    <div class="record-box a active" id="a-records">
+                        <h2><i class="fa fa-database"></i> A Records <span class="count" id="a-count">0</span></h2>
                         <div class="record-content"></div>
                     </div>
-                    <div class="record-box" id="www-records">
-                        <h2>WWW Record <span class="count" id="www-count">0</span></h2>
+                    <div class="record-box www" id="www-records">
+                        <h2><i class="fa fa-database"></i> WWW Record <span class="count" id="www-count">0</span></h2>
                         <div class="record-content"></div>
                     </div>
-                    <div class="record-box" id="ns-records">
-                        <h2>Nameservers <span class="count" id="ns-count">0</span></h2>
+                    <div class="record-box ns" id="ns-records">
+                        <h2><i class="fa fa-server"></i> Nameservers <span class="count" id="ns-count">0</span></h2>
                         <div class="record-content"></div>
                     </div>
-                    <div class="record-box" id="mx-records">
-                        <h2>Mail Servers <span class="count" id="mx-count">0</span></h2>
+                    <div class="record-box mx" id="mx-records">
+                        <h2><i class="fa fa-envelope"></i> Mail Servers <span class="count" id="mx-count">0</span></h2>
                         <div class="record-content"></div>
                     </div>
-                    <div class="record-box" id="txt-records">
-                        <h2>TXT Records <span class="count" id="txt-count">0</span></h2>
+                    <div class="record-box txt" id="txt-records">
+                        <h2><i class="fa fa-database"></i> TXT Records <span class="count" id="txt-count">0</span></h2>
                         <div class="record-content"></div>
                     </div>
-                    <div class="record-box" id="ptr-records">
-                        <h2>PTR Records <span class="count" id="ptr-count">0</span></h2>
+                    <div class="record-box ptr" id="ptr-records">
+                        <h2><i class="fa fa-database"></i> PTR Records <span class="count" id="ptr-count">0</span></h2>
                         <div class="record-content"></div>
                     </div>
                 </div>

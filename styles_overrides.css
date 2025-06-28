@@ -1,0 +1,108 @@
+/* Modern premium overrides */
+/* Elevation and radius */
+:root{
+    --elev-1: 0 2px 6px rgba(0,0,0,.06);
+    --elev-2: 0 4px 12px rgba(0,0,0,.08);
+    --radius:12px;
+}
+
+.record-box, .ip-lookup-input{
+    border-radius:var(--radius);
+    box-shadow:var(--elev-1);
+    padding:16px 18px;
+    margin-bottom:16px;
+    animation:fade .4s ease;
+}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+.tabs .tab{
+    padding:8px 14px;
+    border-radius:8px;
+    transition:.2s;
+}
+.tabs .tab:hover{background:#3b82f6;}
+.tabs .tab.active{
+    background:#3b82f6;
+    color:#fff;
+    box-shadow:var(--elev-1);
+}
+
+
+/* DNS card header colors */
+.record-box.a h2{color:#2563eb;}
+.record-box.mx h2{color:#ea4335;}
+.record-box.ns h2{color:#10b981;}
+.record-box.txt h2{color:#f59e0b;}
+.record-box.ptr h2{color:#a855f7;}
+
+/* Input neumorphic */
+.ip-lookup-input{
+    display:flex;gap:8px;
+    background:rgba(255,255,255,.6);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--border-color);
+}
+body.dark-theme .ip-lookup-input{background:rgba(38,50,56,.4);}
+.ip-lookup-input input{flex:1;border:none;background:transparent;font-size:14px;outline:none;}
+.ip-lookup-input button{
+    padding:6px 14px;
+    background:#3b82f6;
+    border:none;border-radius:8px;color:#fff;font-weight:500;transition:.2s;
+}
+.ip-lookup-input button:hover{filter:brightness(1.08);}
+
+/* Theme toggle */
+.theme-toggle{
+    width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--card-background);box-shadow:var(--elev-1);transition:.3s;
+}
+.theme-toggle:hover{box-shadow:var(--elev-2);transform:rotate(20deg);}
+
+/* Micro interactions */
+button,.tab{transition:box-shadow .2s,transform .2s;}
+button:hover,.tab:hover{box-shadow:var(--elev-2);transform:translateY(-1px);}
+
+/* Tooltip */
+[data-tip]{position:relative;}
+[data-tip]:hover::after{
+    content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%) scale(.95);
+    background:#111827;color:#fff;font-size:11px;padding:4px 8px;border-radius:6px;opacity:0;animation:tip .3s forwards;
+}
+@keyframes tip{to{opacity:1;transform:translateX(-50%) scale(1);}}
+
+/* Dark mode adjustments */
+body.dark-theme{
+    background:#101623; /* richer dark steel blue */
+    --card-background:#162032;
+    --record-item-background:#1c273a;
+    --border-color:#24344d;
+    --tabs-background:#0f1a2a;
+    --text-primary:#cbd5e1;
+    --text-secondary:#8b9bb4;
+    --text-muted:#667891;
+    color:var(--text-primary);
+    backdrop-filter:blur(4px);
+}
+    
+    
+    
+    
+
+body.dark-theme .record-box,body.dark-theme .ip-lookup-input{
+    box-shadow:0 2px 8px rgba(0,0,0,.45);
+}
+
+/* Nested scrollbar hide */
+.records-container *::-webkit-scrollbar,
+.record-box::-webkit-scrollbar{display:none;}
+.records-container::-webkit-scrollbar{width:0!important;}
+.dns-records::-webkit-scrollbar{width:0!important;}
+.records-container *{scrollbar-width:none;}
+
+/* Global scrollbar hide */
+body::-webkit-scrollbar{display:none;}
+body{scrollbar-width:none;}
+
+/* Remove unnecessary internal scroll */
+.records-container,.dns-records{max-height:none;overflow-y:visible;}
+
