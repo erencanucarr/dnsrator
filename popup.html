@@ -1,94 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>DNSRator</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="styles_overrides.css">
-    <!-- Inter font for clean, modern typography -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta charset="UTF-8">
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="header-content">
-                <h1>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"></path>
-                        <path d="M12 8v8"></path>
-                        <path d="M8 12h8"></path>
-                    </svg>
-                    DNSRator
-                </h1>
-                <div class="current-site"></div>
-                <div class="security-indicators">
-                    <span id="blacklist-indicator" class="indicator" data-tip="Spamhaus blacklist status"></span>
-                </div>
+        <div id="error-box" class="error-box" hidden></div>
+
+        <header class="topbar">
+            <span class="brand"><span class="brand-mark">DNSRATOR</span><span class="cursor" aria-hidden="true">▊</span></span>
+            <div class="topnav">
+                <button id="fav-toggle" class="theme-btn" title="Add to favorites"><i class="fa-regular fa-star"></i></button>
+                <button id="theme-toggle" class="theme-btn" title="Theme">☾</button>
             </div>
-            <button class="theme-toggle" id="theme-toggle" title="Toggle theme">☀️</button>
         </header>
-        
-        <div class="tabs main-tabs">
-            <div class="tab active" data-tab="dns"><i class="fa fa-globe"></i> DNS</div>
-            <div class="tab" data-tab="ip"><i class="fa fa-search"></i> IP Lookup</div>
-        </div>
-        
-        <div class="records-container">
-            <!-- DNS Records Section -->
-            <div class="record-box active" id="dns-section">
-                <div class="tabs inner-tabs">
-                    <div class="tab active" data-tab="a">A</div>
-                    <div class="tab" data-tab="www">WWW</div>
-                    <div class="tab" data-tab="ns">NS</div>
-                    <div class="tab" data-tab="mx">MX</div>
-                    <div class="tab" data-tab="txt">TXT</div>
-                    <div class="tab" data-tab="ptr">PTR</div>
+
+        <main class="wrap">
+            <div class="status-bar">
+                <span class="domain-name" id="current-site">—</span>
+                <span id="blacklist-indicator" class="badge">…</span>
+                <button id="copy-site" class="mini-btn" title="Copy site"><i class="fa fa-copy"></i></button>
+            </div>
+
+            <div id="sip-card" class="sip-card" hidden>
+                <div class="sip-row">
+                    <span class="sip-label">server ip</span>
+                    <span id="sip-ip" class="sip-ip">—</span>
+                    <span id="sip-mnem" class="sip-mnem" hidden></span>
+                    <button id="sip-copy" class="mini-btn" title="Copy server IP" hidden><i class="fa fa-copy"></i></button>
                 </div>
-                <div class="dns-records">
-                    <div class="record-box a active" id="a-records">
-                        <h2><i class="fa fa-database"></i> A Records <span class="count" id="a-count">0</span></h2>
-                        <div class="record-content"></div>
+                <div id="sip-hint" class="sip-hint"></div>
+            </div>
+
+            <div class="tabs main-tabs" role="tablist">
+                <button class="tab active" data-tab="dns" role="tab">dns</button>
+                <button class="tab" data-tab="ip" role="tab">ip-lookup</button>
+            </div>
+
+            <div class="records-container">
+                <!-- DNS Records Section -->
+                <div class="panel record-box active" id="dns-section">
+                    <div class="tabs inner-tabs" role="tablist">
+                        <button class="tab active" data-tab="a">A <span class="tab-count zero" id="a-count">0</span></button>
+                        <button class="tab" data-tab="www">WWW <span class="tab-count zero" id="www-count">0</span></button>
+                        <button class="tab" data-tab="ns">NS <span class="tab-count zero" id="ns-count">0</span></button>
+                        <button class="tab" data-tab="mx">MX <span class="tab-count zero" id="mx-count">0</span></button>
+                        <button class="tab" data-tab="txt">TXT <span class="tab-count zero" id="txt-count">0</span></button>
+                        <button class="tab" data-tab="ptr">PTR <span class="tab-count zero" id="ptr-count">0</span></button>
                     </div>
-                    <div class="record-box www" id="www-records">
-                        <h2><i class="fa fa-database"></i> WWW Record <span class="count" id="www-count">0</span></h2>
-                        <div class="record-content"></div>
+                    <div class="dns-records">
+                        <div class="record-box a active" id="a-records"><div class="record-content"></div></div>
+                        <div class="record-box www" id="www-records"><div class="record-content"></div></div>
+                        <div class="record-box ns" id="ns-records"><div class="record-content"></div></div>
+                        <div class="record-box mx" id="mx-records"><div class="record-content"></div></div>
+                        <div class="record-box txt" id="txt-records"><div class="record-content"></div></div>
+                        <div class="record-box ptr" id="ptr-records"><div class="record-content"></div></div>
                     </div>
-                    <div class="record-box ns" id="ns-records">
-                        <h2><i class="fa fa-server"></i> Nameservers <span class="count" id="ns-count">0</span></h2>
-                        <div class="record-content"></div>
+                </div>
+                <!-- IP Lookup Section -->
+                <div class="panel record-box" id="ip-section">
+                    <div class="search cmd">
+                        <span class="prompt" aria-hidden="true"><span class="dollar">$</span><span class="cmd-name">lookup</span></span>
+                        <input id="ip-input" type="text" placeholder="8.8.8.8" autocomplete="off" spellcheck="false">
+                        <button id="lookup-btn">Query</button>
                     </div>
-                    <div class="record-box mx" id="mx-records">
-                        <h2><i class="fa fa-envelope"></i> Mail Servers <span class="count" id="mx-count">0</span></h2>
-                        <div class="record-content"></div>
-                    </div>
-                    <div class="record-box txt" id="txt-records">
-                        <h2><i class="fa fa-database"></i> TXT Records <span class="count" id="txt-count">0</span></h2>
-                        <div class="record-content"></div>
-                    </div>
-                    <div class="record-box ptr" id="ptr-records">
-                        <h2><i class="fa fa-database"></i> PTR Records <span class="count" id="ptr-count">0</span></h2>
-                        <div class="record-content"></div>
+                    <div id="ip-result" class="result"><div class="empty-line">$ awaiting query…</div></div>
+                    <div class="recent">
+                        <span class="recent-label">recent</span>
+                        <div id="ip-history" class="recent-chips"></div>
+                        <button id="ip-history-clear" class="recent-clear" type="button">clear</button>
                     </div>
                 </div>
             </div>
-            <!-- IP Lookup Section -->
-            <div class="record-box" id="ip-section">
-                <h2>IP Lookup</h2>
-                <div class="ip-lookup-input">
-                    <input id="ip-input" type="text" placeholder="Enter IP address">
-                    <button id="lookup-btn">Lookup</button>
-                </div>
-                <div id="ip-result" class="ip-lookup-result"></div>
-            </div>
-        </div>
-        
-        <div class="loader">Loading...</div>
-        
-        <div class="footer">
-            <span>DNSRator - All Rights Reserved.</span>
-        </div>
+
+            <div class="loader"><span class="spin"></span>querying…</div>
+
+            <footer class="foot">
+                <span class="foot-brand">D N S R A T O R</span>
+                <button id="open-settings" class="link-btn">settings</button>
+            </footer>
+        </main>
     </div>
     <script src="popup.js"></script>
 </body>

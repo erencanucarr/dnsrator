@@ -1,22 +1,42 @@
 {
   "manifest_version": 3,
   "name": "DNSRator",
-  "version": "2.0.0",
-  "description": "DNS record viewer and IP geolocation lookup extension.",
+  "version": "2.3.0",
+  "description": "DNS record viewer, real server IP badge + overlay, and IP geolocation lookup extension.",
   "permissions": [
     "activeTab",
     "tabs",
-    "storage"
+    "storage",
+    "webRequest",
+    "scripting"
   ],
   "host_permissions": [
-    "http://*/",
-    "https://*/"
+    "<all_urls>"
   ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_title": "DNSRator",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   },
   "background": {
     "service_worker": "background.js"
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/hover-box.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
   "options_page": "settings.html"
 }

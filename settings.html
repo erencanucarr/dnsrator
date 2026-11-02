@@ -4,29 +4,88 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
-  <title>DNSRator + IP Scan – Settings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>DNSRator – Settings</title>
 </head>
-<body class="popup-container">
-  <h2 style="margin-top:0">Settings</h2>
+<body class="settings-page">
+  <div class="settings-wrap">
+    <header class="settings-head">
+      <h1><i class="fa fa-gear"></i> Settings</h1>
+      <p class="muted">DNSRator, Best Of DNS Checker Extensions</p>
+    </header>
 
-  <!-- Theme toggle -->
-  <div class="settings-section theme-toggle">
-    <label for="theme-select"><strong>Theme:</strong></label>
-    <select id="theme-select">
-      <option value="dark">Dark</option>
-      <option value="light">Light</option>
-    </select>
+    <!-- Appearance -->
+    <section class="settings-card" aria-labelledby="h-theme">
+      <h2 id="h-theme"><i class="fa fa-circle-half-stroke"></i> Appearance</h2>
+      <label class="row" for="theme-select">
+        <span>Theme</span>
+        <select id="theme-select">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+          <option value="system">System</option>
+        </select>
+      </label>
+    </section>
+
+    <!-- ServerIP -->
+    <section class="settings-card" aria-labelledby="h-serverip">
+      <h2 id="h-serverip"><i class="fa fa-server"></i> Real Server IP (ServerIP)</h2>
+      <p class="muted small">Actual connection IP captured via webRequest. May differ from DNS records (CDN/proxy).</p>
+      <label class="row switch-row">
+        <span><strong>Enabled</strong><br><small class="muted">When off, badge, overlay and popup card are hidden</small></span>
+        <input type="checkbox" id="sip-enabled" class="switch" />
+      </label>
+      <div id="sip-sub">
+        <label class="row switch-row">
+          <span>Show in badge <small class="muted">(last octet / mnemonic)</small></span>
+          <input type="checkbox" id="sip-badge" class="switch" />
+        </label>
+        <label class="row switch-row">
+          <span>On-page hover box <small class="muted">(overlay on all sites)</small></span>
+          <input type="checkbox" id="sip-hover" class="switch" />
+        </label>
+        <label class="row" for="sip-corner">
+          <span>Hover box position <small class="muted">(until you drag it)</small></span>
+          <select id="sip-corner">
+            <option value="top-right">Top right</option>
+            <option value="top-left">Top left</option>
+            <option value="bottom-right">Bottom right</option>
+            <option value="bottom-left">Bottom left</option>
+          </select>
+        </label>
+        <div class="row">
+          <span>Dragged position <small class="muted">(shared by all sites)</small></span>
+          <button id="sip-reset-pos" class="btn ghost" type="button"><i class="fa fa-rotate-left"></i> Reset</button>
+        </div>
+        <label class="row" for="sip-color">
+          <span>Default badge/box color</span>
+          <span class="color-wrap"><input type="color" id="sip-color" value="#ff9b33" /> <code id="sip-color-out">#ff9b33</code></span>
+        </label>
+        <p class="muted small">These options apply immediately. Use × on the box to hide it in a single tab.</p>
+      </div>
+    </section>
+
+    <!-- Mnemonics -->
+    <section class="settings-card" aria-labelledby="h-mnem">
+      <h2 id="h-mnem"><i class="fa fa-tags"></i> Mnemonics</h2>
+      <p class="muted small">IP → short label + color. e.g. <code>127.0.0.1 → lcl</code></p>
+      <div id="mnem-container"></div>
+      <button id="add-mnem" class="btn ghost" type="button"><i class="fa fa-plus"></i> Add row</button>
+    </section>
+
+    <!-- Endpoints -->
+    <section class="settings-card" aria-labelledby="h-ep">
+      <h2 id="h-ep"><i class="fa fa-plug"></i> IP API Endpoints</h2>
+      <p class="muted small">First successful response stops the chain. Keep the <code>{ip}</code> placeholder.</p>
+      <div id="endpoints-container"></div>
+      <button id="add-endpoint" class="btn ghost" type="button"><i class="fa fa-plus"></i> Add endpoint</button>
+    </section>
+
+    <div class="settings-actions">
+      <button id="save-btn" class="btn primary" type="button">Save</button>
+      <span id="save-status" class="muted small" role="status"></span>
+    </div>
   </div>
-
-  <!-- Endpoints list -->
-  <div class="settings-section">
-    <strong>Endpoints</strong>
-    <small class="muted">(first success stops cascade)</small>
-    <div id="endpoints-container"></div>
-    <button id="add-endpoint">Add Endpoint</button>
-  </div>
-
-  <button id="save-btn">Save</button>
 
   <script type="module" src="settings.js"></script>
 </body>
