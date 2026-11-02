@@ -70,4 +70,4 @@ We may update this Privacy Policy from time to time. If significant changes are 
 
 ## Contact
 
-If you have any questions or concerns about this Privacy Policy, please contact us at: hi@eren.gg
+If you have any questions or concerns about this Privacy Policy, please contact us at: hi@erencan.me
